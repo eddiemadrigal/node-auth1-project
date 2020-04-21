@@ -1,9 +1,9 @@
-const users = [{"name": "Erika"}]
+const db = require('../data/db-config');
 
 module.exports = {
   getUsers
 }
 
 function getUsers() {
-  return users
+  return db('users');
 }
