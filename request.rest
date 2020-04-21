@@ -1,3 +1,7 @@
+### check root / for api up message
+
+GET http://localhost:5000
+
 ### get a list of users
 GET http://localhost:5000/users
 

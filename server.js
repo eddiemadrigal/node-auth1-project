@@ -1,40 +1,12 @@
 const express = require('express')
-const app = express()
-const bcrypt = require('bcrypt')
+const server = express()
 
-app.use(express.json())
+const UserRouter = require('./users/user-router')
 
-const users = []
+server.use('/users', UserRouter);
 
-app.get('/users', (req, res) => {
-  res.json(users)
+server.get('/', (req, res) => {
+  res.send({ message: 'API up ...' })
 })
 
-app.post('/users', async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    const user = { username: req.body.username, password: hashedPassword }
-    users.push(user)
-    res.status(201).send()
-  } catch {
-    res.status(500).send()
-  }
-})
-
-app.post('/users/login', async (req, res) => {
-  const user = users.find(user => user.username === req.body.username)
-  if (user == null) {
-    return res.status(400).send('User not found')
-  }
-  try {
-    if(await bcrypt.compare(req.body.password, user.password)) {
-      res.send('Success')
-    } else {
-      res.send('Not Allowed')
-    }
-  } catch {
-    res.status(500).send()
-  }
-})
-
-app.listen(5000)
+module.exports = server;
