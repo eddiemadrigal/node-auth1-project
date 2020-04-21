@@ -1,8 +1,8 @@
 
 exports.up = function(knex) {
   return knex.schema
-    .createTable('users', tbl => {
-      tbl.increments('id', 255).primary()
+    .createTable('userTable', tbl => {
+      tbl.increments('id', 255).primary();
       tbl.string('username', 255).notNullable();
       tbl.string('password', 255).notNullable();
     })
@@ -10,5 +10,5 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTableIfExists('users')
+    .dropTableIfExists('userTable')
 };

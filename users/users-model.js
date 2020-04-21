@@ -1,9 +1,9 @@
 const db = require('../data/db-config');
 
 module.exports = {
-  getUsers
+  getUser
 }
 
-function getUsers() {
-  return db('users');
+function getUser() {
+  return db('userTable')
 }
